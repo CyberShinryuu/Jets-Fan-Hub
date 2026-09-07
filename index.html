@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shinryuu Winnipeg Jets Fan Hub</title>
+    <style>
+        :root {
+            --navy-dark: #041e42;
+            --navy-header: #021229;
+            --blue-bg: #1d5288;
+            --blue-card: #0a2342;
+            --blue-away-bg: #2365a8; /* Azul más claro para juegos de visitante */
+            --text-light: #ffffff;
+            --accent-blue: #004c97;
+            --accent-red: #d9272e;
+            --border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--blue-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--navy-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2.2fr;
+            gap: 30px;
+            padding: 30px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* SCHEDULE SECTION */
+        .schedule-card {
+            background-color: var(--navy-dark);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        .schedule-list {
+            list-style: none;
+        }
+
+        .schedule-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Clases para diferenciar Visitante vs Local */
+        .schedule-item.game-away {
+            background-color: var(--blue-away-bg);
+        }
+
+        .schedule-item.game-home {
+            background-color: var(--navy-dark);
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-day {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .schedule-time {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Ajustes para la sección del enfrentamiento */
+        .matchup-teams {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 6px;
+        }
+
+        .team-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.5));
+            transition: transform 0.2s ease;
+        }
+
+        .team-logo:hover {
+            transform: scale(1.08);
+        }
+
+        .vs-text {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--accent-red);
+            font-style: italic;
+        }
+
+        .schedule-footer {
+            padding: 14px 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            font-size: 0.9rem;
+            color: #7daed3;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* MAIN VIDEO PLAYER */
+        .main-video-wrapper {
+            position: relative;
+            background-color: #000;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .main-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* HIGHLIGHTS GRID */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .video-card {
+            background-color: var(--navy-dark);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-thumbnail {
+            aspect-ratio: 16 / 9;
+            background-color: #122b49;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .video-card:hover .play-overlay {
+            background: var(--accent-red);
+            transform: scale(1.1);
+            border-color: transparent;
+        }
+
+        .play-overlay::after {
+            content: "";
+            border-style: solid;
+            border-width: 6px 0 6px 11px;
+            border-color: transparent transparent transparent white;
+            margin-left: 2px;
+        }
+
+        .video-info {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.82rem;
+            background-color: var(--navy-dark);
+            flex: 1;
+        }
+
+        .video-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #e0e6ed;
+            font-size: 0.8rem;
+        }
+
+        .play-icon-small {
+            width: 16px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .play-icon-small::after {
+            content: "";
+            border-style: solid;
+            border-width: 3.5px 0 3.5px 6px;
+            border-color: transparent transparent transparent white;
+            margin-left: 1px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--navy-header);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+       
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-title">
+                <div class="logo-container">
+                    <svg viewBox="0 0 100 100" width="32" height="32">
+                        <circle cx="50" cy="50" r="48" fill="#041e42" stroke="#ffffff" stroke-width="3"/>
+                        <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" fill="#d9272e"/>
+                        <circle cx="50" cy="50" r="12" fill="#004c97"/>
+                    </svg>
+                </div>
+                <h1>Winnipeg Jets Fan Hub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="schelude.html">SCHEDULE</a></li>
+                    <li><a href="highlights.html">HIGHLIGHTS</a></li>
+                    <li><a href="https://www.nhl.com/jets/news/">NEWS</a></li>
+                    <li><a href="https://www.ticketmaster.com/nhl?brand=winnipegjets&artistid=1613893&wt.mc_id=NHL_TEAM_WPG_OFFSEASON_BANNER&utm_source=NHL.com&utm_medium=client&utm_campaign=NHL_TEAM_WPG&utm_content=OFFSEASON_BANNER">TICKETS</a></li>
+                    <li><a href="mailto:jets-fan@outlook.com">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section>
+            <h2 class="section-title">Preseason Schedule</h2>
+            <div class="schedule-card">
+                <ul class="schedule-list">
+                    <li class="schedule-item game-away">
+                        <div class="matchup-teams">
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/WPG_light.svg" alt="Winnipeg Jets Logo" title="Winnipeg Jets">
+                            <span class="vs-text">VS</span>
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/EDM_light.svg" alt="Edmonton Oilers Logo" title="Edmonton Oilers">
+                        </div>
+                        <span class="schedule-day">Sep 19 (Away Game)</span>
+                        <span class="schedule-time">7:00 PM</span>
+                    </li>
+                    <li class="schedule-item game-home">
+                        <div class="matchup-teams">
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/COL_light.svg" alt="Winnipeg Jets Logo" title="Winnipeg Jets">
+                            <span class="vs-text">VS</span>
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/WPG_light.svg" alt="Edmonton Oilers Logo" title="Edmonton Oilers">
+                        </div>
+                        <span class="schedule-day">Sep 21 (Home Game)</span>
+                        <span class="schedule-time">7:00 PM</span>
+                    </li>
+                    <li class="schedule-item game-home">
+                        <div class="matchup-teams">
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/EDM_light.svg" alt="Winnipeg Jets Logo" title="Winnipeg Jets">
+                            <span class="vs-text">VS</span>
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/WPG_light.svg" alt="Edmonton Oilers Logo" title="Edmonton Oilers">
+                        </div>
+                        <span class="schedule-day">Sep 22 (Home Game)</span>
+                        <span class="schedule-time">7:00 PM</span>
+                    </li>
+                    <li class="schedule-item game-away">
+                        <div class="matchup-teams">
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/WPG_light.svg" alt="Winnipeg Jets Logo" title="Winnipeg Jets">
+                            <span class="vs-text">VS</span>
+                            <img class="team-logo" src="https://assets.nhle.com/logos/nhl/svg/COL_light.svg" alt="Edmonton Oilers Logo" title="Edmonton Oilers">
+                        </div>
+                        <span class="schedule-day">Sep 25 (Away Game)</span>
+                        <span class="schedule-time">7:30 PM</span>
+                    </li>
+                </ul>
+                <div class="schedule-footer">
+
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Highlights</h2>
+            
+            <div class="main-video-wrapper">
+                <video id="mainPlayer" controls playsinline webkit-playsinline poster="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg">
+                    <source src="" type="video/mp4">
+                    Tu navegador no soporta reproducción de video.
+                </video>
+            </div>
+
+            <div class="video-grid">
+                
+                <div class="video-card" onclick="playVideoInMain('Varios/Full game 7 Blues vs Jets 2025 Stanley Cup Playoffs(1rst round).mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">Blues Vs Jets Game 7 2025</span>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('Varios/Winnipeg Jets Win Game 7 After Tying It with 1.6 Seconds Left _ Whiteout Eruption Across the City(720P_HD).mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title"> Whiteout Eruption Across the City.</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('Varios/2026_27 Winnipeg Jets Hype(480P).mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">2026/27 Winnipeg Jets Hype</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">Victoria vs. Canucks (Embedded)</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoylines.mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">Fotos del Juego ... (Video)</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">Fotos del Juego ... (Video)</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">Fotos del Juego ... (Embedded)</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideoInMain('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4')">
+                    <div class="video-thumbnail">
+                        <img src="Varios/Gemini_Generated_Image_qi5r93qi5r93qi5r.jpg" alt="Thumbnail">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-title">Victoria vs. Canucks (Embedded)</span>
+                        <div class="play-icon-small"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div>Winnipeg Jets Fan Hub</div>
+       
+    </footer>
+
+    <script>
+        function playVideoInMain(videoUrl) {
+            const mainPlayer = document.getElementById('mainPlayer');
+            
+            mainPlayer.setAttribute('playsinline', '');
+            mainPlayer.setAttribute('webkit-playsinline', '');
+            
+            mainPlayer.src = videoUrl;
+            mainPlayer.play();
+            
+            mainPlayer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+
+</body>
+</html>

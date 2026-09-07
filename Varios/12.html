@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINNIPEG JETS FAN HUB </title>
+    <style>
+        :root {
+            --navy-dark: #041e42;
+            --navy-header: #0a2342;
+            --blue-bg: #4a6b82;
+            --blue-card: #15325b;
+            --text-light: #e0e6ed;
+            --accent-red: #004c97;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--blue-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--navy-dark);
+            border-bottom: 2px solid #fff;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 5px 20px;
+            font-size: 14px;
+            background-color: #021229;
+            color: #aaa;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column; /* Organiza logo y título en columna */
+            align-items: center;    /* Centra horizontalmente logo y título */
+            justify-content: center;
+            padding: 20px 40px;
+            gap: 12px;              /* Espacio entre el logo y el título */
+        }
+
+        /* Estilo para el contenedor del logo */
+        .logo-container {
+            width: 80px;            /* Controla el tamaño del logo */
+            height: auto;           /* Mantiene la proporción */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilo para la imagen del logo */
+        .logo-container img {
+            width: 100%;            /* Ocupa el contenedor */
+            height: auto;           /* Mantiene la proporción */
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 10px 40px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center; /* Centra los elementos del menú */
+            align-items: center;
+            flex-wrap: wrap;         /* Permite adaptarse en pantallas pequeñas */
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* SECCIÓN IZQUIERDA: CALENDARIO */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+
+        /* FILTRO DE MESES */
+        .month-selector {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .month-btn {
+            background-color: var(--navy-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .month-btn:hover, .month-btn.active {
+            background-color: #004c97;
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .table-category {
+            background-color: var(--navy-dark);
+            padding: 8px 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .schedule-table tr {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .schedule-table td {
+            padding: 10px 8px;
+            font-size: 0.95rem;
+        }
+
+        .schedule-table a {
+            color: #9bbcd4;
+            text-decoration: none;
+        }
+
+        .schedule-table a:hover {
+            text-decoration: underline;
+        }
+
+        /* SECCIÓN DERECHA: MULTIMEDIA */
+        .video-player {
+            position: relative;
+            background-color: #000;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border: 2px solid var(--navy-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(217, 39, 46, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .play-btn::after {
+            content: "";
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .video-card {
+            background-color: var(--navy-dark);
+            overflow: hidden;
+        }
+
+        .video-thumbnail {
+            height: 120px;
+            background-color: #2a4365;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-card .play-btn {
+            width: 35px;
+            height: 35px;
+        }
+
+        .video-card .play-btn::after {
+            border-width: 6px 0 6px 12px;
+        }
+
+        .video-title {
+            padding: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            background-color: var(--navy-dark);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        footer ul {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+        }
+
+        footer a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="top-bar">
+            <span>Winnipeg Jets ▾</span>
+        </div>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="Varios/winnipeg-jets-logo.png" alt="Winnipeg Jets Logo">
+            </div>
+            <h1>Winnipeg Jets Fan Hub</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="https://www.nhl.com/jets/news/">Highlights</a></li>
+                <li><a href="https://www.nhl.com/standings/2026-04-17/division">Standings</a></li>
+                <li><a href="https://www.nhl.com/jets/news/">News</a></li>
+                <li><a href="https://www.ticketmaster.ca/winnipeg-jets-tickets/artist/1613893">Tickets</a></li>
+                <li><a href="mailto:jetsfan@gmail.com">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        
+        <!-- CALENDARIO CON FILTRO POR MES -->
+        <section>
+            <h2 class="section-title">Jets Schedule 2026-2027</h2>
+            
+            <!-- Botones de navegación con todos los meses agregados -->
+            <div class="month-selector">
+                <button class="month-btn active" onclick="filterMonth('all', this)">Todos</button>
+                <button class="month-btn" onclick="filterMonth('sep', this)">SEP</button>
+                <button class="month-btn" onclick="filterMonth('oct', this)">OCT</button>
+                <button class="month-btn" onclick="filterMonth('nov', this)">Nov</button>
+                <button class="month-btn" onclick="filterMonth('dic', this)">DIC</button>
+                <button class="month-btn" onclick="filterMonth('ene', this)">JAN</button>
+                <button class="month-btn" onclick="filterMonth('feb', this)">FEB</button>
+                <button class="month-btn" onclick="filterMonth('mar', this)">MAR</button>
+                <button class="month-btn" onclick="filterMonth('abr', this)">APR</button>
+            </div>
+
+            <!-- PRESEASON (SEPTIEMBRE) -->
+            <div class="schedule-group" data-month="sep">
+                <div class="table-category">Preseason - September</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Sep 19</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Oilers</td>
+                        <td class="action-links" style="width: 25%;"><a href="https://www.nhl.com/gamecenter/wpg-vs-edm/2026/09/19/2026010003">Gamecenter</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Sep 21</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Avalanche</td>
+                        <td class="action-links" style="width: 25%;"><a href="https://www.nhl.com/gamecenter/col-vs-wpg/2026/09/21/2026010015">Gamecenter</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Sep 22</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Oilers</td>
+                        <td class="action-links" style="width: 25%;"><a href="https://www.nhl.com/gamecenter/edm-vs-wpg/2026/09/22/2026010023">Gamecenter</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Sep 25</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Avalanche</td>
+                        <td class="action-links" style="width: 25%;"><a href="https://www.nhl.com/gamecenter/wpg-vs-col/2026/09/25/2026010048">Gamecenter</a></td>
+                    </tr>        
+                </table>
+            </div>
+
+            <!-- OCTUBRE -->
+            <div class="schedule-group" data-month="oct">
+                <div class="table-category">Regular Season - October</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Oct 02</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Bruins</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 04</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Red Wings</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 05</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Penguins</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Oct 13</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>@ Minnesota Wild</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- NOVIEMBRE -->
+            <div class="schedule-group" data-month="nov">
+                <div class="table-category">Regular Season - November</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Nov 3</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Edmonton Oilers</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 7</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Edmonton Oilers</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Nov 27</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Calgary Flames</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- DICIEMBRE -->
+            <div class="schedule-group" data-month="dic">
+                <div class="table-category">Regular Season - December</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Dec 02</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs St. Louis Blues</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dec 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dic 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dic 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dic 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Dic 15</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Dallas Stars</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ENERO -->
+            <div class="schedule-group" data-month="ene">
+                <div class="table-category">Regular Season - January</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Ene 05</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Toronto Maple Leafs</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                   <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Ene 18</td>
+                        <td style="width: 20%;" class="game-time">8:30 PM</td>
+                        <td>@ Vancouver Canucks</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- FEBRERO -->
+            <div class="schedule-group" data-month="feb">
+                <div class="table-category">Regular Season - Febrero</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Feb 02</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Montreal Canadiens</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Feb 20</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Vegas Golden Knights</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- MARZO -->
+            <div class="schedule-group" data-month="mar">
+                <div class="table-category">Regular Season - Marzo</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Mar 04</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Boston Bruins</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Mar 19</td>
+                        <td style="width: 20%;" class="game-time">7:30 PM</td>
+                        <td>@ Nashville Predators</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ABRIL -->
+            <div class="schedule-group" data-month="abr">
+                <div class="table-category">Regular Season - Abril</div>
+                <table class="schedule-table">
+                    <tr>
+                        <td style="width: 20%;">Abr 02</td>
+                        <td style="width: 20%;" class="game-time">7:00 PM</td>
+                        <td>vs Colorado Avalanche</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">Abr 14</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Seattle Kraken</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Abr 14</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Seattle Kraken</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Abr 14</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Seattle Kraken</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                     <tr>
+                        <td style="width: 20%;">Abr 14</td>
+                        <td style="width: 20%;" class="game-time">8:00 PM</td>
+                        <td>@ Seattle Kraken</td>
+                        <td class="action-links" style="width: 25%;"><a href="#">Boletos</a> | <a href="#">Resumen</a></td>
+                    </tr>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- MULTIMEDIA -->
+        <section>
+        <h2 class="section-title">game of the season. game 7 Blues vs Jets 2025 Stanley Cup Playoffs (1rst round) </h2>
+  
+<div class="video-player">
+    <iframe 
+        width="100%" 
+        height="315" 
+        src="Full game 7 Blues vs Jets 2025 Stanley Cup Playoffs(1rst round).mp4" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+    </iframe>
+</div>
+            <h2 class="section-title">Highlights</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Fotos del Juego vs. Sabres</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Fotos del Juego vs. Sabres</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Fotos del Juego vs. Sabres</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Fotos del Juego vs. Sabres</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Fotos del Juego vs. Sabres</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div><div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail"><div class="play-btn"></div></div>
+                    <div class="video-title">Resumen Victoria vs. Canucks</div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <ul>
+            <li><a href="#">Calendario</a></li>
+            <li><a href="#">Links</a></li>
+            <li><a href="#">Multimedia</a></li>
+            <li><a href="#">Boletos</a></li>
+        </ul>
+        <div>&reg;</div>
+    </footer>
+
+    <!-- JAVASCRIPT DE FILTRADO -->
+    <script>
+        function filterMonth(month, btnElement) {
+            // Actualizar clase activa de los botones
+            const buttons = document.querySelectorAll('.month-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Filtrar las secciones por mes
+            const groups = document.querySelectorAll('.schedule-group');
+            groups.forEach(group => {
+                if (month === 'all' || group.getAttribute('data-month') === month) {
+                    group.style.display = 'block';
+                } else {
+                    group.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
